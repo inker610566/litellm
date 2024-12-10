@@ -539,3 +539,8 @@ class AmazonConverseConfig:
         if potential_region in self._supported_cross_region_inference_region():
             return model.split(".", 1)[1]
         return model
+
+    def is_streamable(self, model: str) -> bool:
+        if model.startswith('converse/'):
+            return True
+        return self._get_base_model(model) in litellm.bedrock_converse_models
